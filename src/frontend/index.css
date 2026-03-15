@@ -1,0 +1,162 @@
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/assets/fonts/BricolageGrotesque.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Satoshi";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/assets/fonts/Satoshi.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Dark forensics theme */
+    --background: 0.12 0.008 240;
+    --foreground: 0.92 0.01 240;
+
+    --card: 0.16 0.01 240;
+    --card-foreground: 0.92 0.01 240;
+
+    --popover: 0.14 0.008 240;
+    --popover-foreground: 0.92 0.01 240;
+
+    --primary: 0.72 0.13 195;
+    --primary-foreground: 0.1 0.01 240;
+
+    --secondary: 0.2 0.012 240;
+    --secondary-foreground: 0.8 0.01 240;
+
+    --muted: 0.18 0.008 240;
+    --muted-foreground: 0.55 0.01 240;
+
+    --accent: 0.22 0.015 240;
+    --accent-foreground: 0.85 0.01 240;
+
+    --destructive: 0.6 0.19 25;
+    --destructive-foreground: 0.96 0.005 240;
+
+    --border: 0.22 0.012 240;
+    --input: 0.2 0.01 240;
+    --ring: 0.72 0.13 195;
+
+    --radius: 0.375rem;
+
+    --chart-1: 0.72 0.13 195;
+    --chart-2: 0.65 0.15 145;
+    --chart-3: 0.75 0.14 70;
+    --chart-4: 0.6 0.19 25;
+    --chart-5: 0.7 0.12 280;
+
+    --sidebar: 0.1 0.008 240;
+    --sidebar-foreground: 0.85 0.01 240;
+    --sidebar-primary: 0.72 0.13 195;
+    --sidebar-primary-foreground: 0.1 0.01 240;
+    --sidebar-accent: 0.18 0.01 240;
+    --sidebar-accent-foreground: 0.85 0.01 240;
+    --sidebar-border: 0.2 0.01 240;
+    --sidebar-ring: 0.72 0.13 195;
+
+    /* Status colors */
+    --status-clean: 0.65 0.15 145;
+    --status-suspicious: 0.75 0.14 70;
+    --status-tampered: 0.6 0.19 25;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  code, pre, .font-mono {
+    font-family: "JetBrains Mono", monospace;
+  }
+}
+
+/* Scan-line overlay effect */
+.scan-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    oklch(0 0 0 / 0.03) 2px,
+    oklch(0 0 0 / 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ELA heatmap styling */
+.ela-canvas {
+  image-rendering: pixelated;
+  filter: saturate(2) contrast(1.2);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: oklch(var(--background));
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(var(--muted-foreground));
+}
+
+/* Grid pattern background */
+.grid-bg {
+  background-image:
+    linear-gradient(oklch(0.22 0.012 240 / 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.22 0.012 240 / 0.3) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Glow effect for primary elements */
+.glow-cyan {
+  box-shadow: 0 0 20px oklch(0.72 0.13 195 / 0.3), 0 0 60px oklch(0.72 0.13 195 / 0.1);
+}
+
+/* Terminal-style text */
+.terminal-text {
+  font-family: "JetBrains Mono", monospace;
+  color: oklch(0.72 0.13 195);
+}
